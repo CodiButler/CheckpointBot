@@ -113,4 +113,6 @@ function getChannelUsingID(channel_id) {
     return (client.channels.cache.get(channel_id));
 }
 
-
+app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
+  const interaction = req.body;
+});
