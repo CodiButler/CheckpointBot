@@ -32,7 +32,7 @@ async function postCheckpoints() {
     //If you don't have a channel ID, use the server and channel name environment variable.
     //If you do have the channel ID, use the environment variable.
     const useChannelID = true;
-    if (useChannelID) { var channel = getChannelUsingID(process.env.CHANNEL_ID); }
+    if (useChannelID) { var channel = getChannelUsingID(process.env.CHANNEL_ID); } 
     else {
         var guild = getGuildUsingName(process.env.SERVER_NAME);
         var channel = getChannelUsingName(guild, process.env.CHANNEL_NAME);
