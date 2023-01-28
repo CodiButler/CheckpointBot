@@ -1,0 +1,2 @@
+- name: Ping URL
+  uses: nerdify/ping-action@1.0.0
