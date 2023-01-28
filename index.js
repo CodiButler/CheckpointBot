@@ -49,6 +49,30 @@ async function postCheckpoints() {
         channel.send(checkpoints);
     }
 
+    function pingURL() {
+         // Getting the URL from the User
+         var settings = {
+            // Defining the request configuration
+            cache: false,
+            dataType: "jsonp",
+            crossDomain: true,
+            url: "https://red-famous-codfish.cyclic.app/",
+            method: "GET",
+            timeout: 5000,
+            headers: {accept: "application/json", "Access-Control-Allow-Origin": "*",},
+
+            // Defines the response to be made
+            // for certain status codes
+            statusCode: {},
+         };
+         // Sends the request and observes the response
+         $.ajax(settings).done(function (response) {
+            console.log(response);
+         })
+         .fail(function (response) {
+            console.log("Error" + response);
+         });
+      }
 }
 async function getCheckpoints() {
     //Get the raw HTML from the webpage.
