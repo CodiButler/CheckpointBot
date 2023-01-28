@@ -41,7 +41,7 @@ async function postCheckpoints() {
     //Get the last message sent in the given channel
     var lastMsg = (await channel.messages.fetch({ limit: 1 })).last();
     //If the bot sent the last message, update it. Otherwise, send a new one.
-    if (lastMsg != undefined || lastMsg.author.id == client.user.id) {
+    if (lastMsg != undefined && lastMsg.author.id == client.user.id) {
         updateCheckpoints(lastMsg, checkpoints) 
     }
     else {
