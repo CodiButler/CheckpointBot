@@ -5,6 +5,7 @@ require("dotenv").config();
 const express = require ("express");
 const app = express();
 const { getTextNodeContent } = require('jsdom/lib/jsdom/living/domparsing/parse5-adapter-serialization');
+const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
 
 
 console.log(">> Starting CheckpointBot 1.0\n");
