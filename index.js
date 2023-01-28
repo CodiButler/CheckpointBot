@@ -2,7 +2,10 @@ const { Client, GatewayIntentBits, messageLink } = require('discord.js');
 const { waitForDebugger } = require('inspector');
 const jsdom = require("jsdom");
 require("dotenv").config();
+const express = require ("express");
+const app = express();
 const { getTextNodeContent } = require('jsdom/lib/jsdom/living/domparsing/parse5-adapter-serialization');
+
 
 console.log(">> Starting CheckpointBot 1.0\n");
 
