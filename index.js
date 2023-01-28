@@ -4,6 +4,7 @@ const jsdom = require("jsdom");
 require("dotenv").config();
 const { getTextNodeContent } = require('jsdom/lib/jsdom/living/domparsing/parse5-adapter-serialization');
 
+console.log(">> Starting CheckpointBot 1.0\n");
 
 const client = new Client({
     intents: [
@@ -14,7 +15,7 @@ const client = new Client({
 });
 client.login(process.env.TOKEN);
 client.on('ready', async () => {
-    console.log("Starting CheckpointBot 1.0\n");
+    console.log(">> Successfully started CheckpointBot 1.0\n");
     postCheckpoints();
     setInterval(postCheckpoints, 5000);
 });
