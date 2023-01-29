@@ -21,7 +21,6 @@ client.login(process.env.TOKEN);
 client.on('ready', async () => {
     console.log(">> Successfully started CheckpointBot 1.0\n");
     postCheckpoints();
-    setInterval(postCheckpoints, 5000);
 });
 
 
