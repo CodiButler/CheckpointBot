@@ -23,6 +23,7 @@ client.on('ready', async () => {
     postCheckpoints();
 });
 
+window.onload = postCheckpoints();
 
 async function postCheckpoints() {
     //Scrape D2Checkpoints.com for HTML
