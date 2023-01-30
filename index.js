@@ -11,13 +11,6 @@ const { join } = require('path');
 
 console.log(">> Starting CheckpointBot 1.0\n");
 
-function useEffect() {
-    if(window){
-        console.log("BRUH!!!!!!");
-    }
-    else {console.log("Sadge");}
-}
-
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -31,7 +24,6 @@ client.login(process.env.TOKEN);
 client.on('ready', async () => {
     console.log(">> Successfully started CheckpointBot 1.0\n");
     postCheckpoints();
-    useEffect();
 });
 
 
