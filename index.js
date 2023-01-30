@@ -75,14 +75,74 @@ async function getCheckpoints() {
         var checkpointActivity = checkpointInfo.childNodes[3].textContent;
         var checkpointFireteamSize = checkpointInfo.childNodes[5].textContent;
         var joinCode = "/join " + cardBody.childNodes[5].textContent.replace(/\n/g, '');
-        var checkpoint = new EmbedBuilder()
-            .setColor(0x0099FF)
-            .setTitle(checkpointEncounter)
-            .setAuthor({name: checkpointActivity})
-            .setDescription(joinCode)
-            .setFooter({text: checkpointFireteamSize})
-            .setTimestamp();
-        outputEmbeds.push(checkpoint);
+
+        if (checkpointActivity.substring(0,4) == "Last") {
+            var checkpoint = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle(checkpointEncounter)
+                .setAuthor({name: checkpointActivity})
+                .setDescription(joinCode)
+                .setFooter({text: checkpointFireteamSize})
+                .setThumbnail("https://www.bungie.net/common/destiny2_content/icons/cfe45e188245bb89a08efa3f481024da.png")
+                .setTimestamp();
+            outputEmbeds.push(checkpoint);
+        }
+        else if (checkpointActivity.substring(0,4) == "Prop") {
+            var checkpoint = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle(checkpointEncounter)
+                .setAuthor({name: checkpointActivity})
+                .setDescription(joinCode)
+                .setFooter({text: checkpointFireteamSize})
+                .setThumbnail("https://www.bungie.net/common/destiny2_content/icons/d2e23b3db794a8226fa417856b5f7f60.png")
+                .setTimestamp();
+            outputEmbeds.push(checkpoint);
+        }
+        else if (checkpointActivity.substring(0,4) == "Deep") {
+            var checkpoint = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle(checkpointEncounter)
+                .setAuthor({name: checkpointActivity})
+                .setDescription(joinCode)
+                .setFooter({text: checkpointFireteamSize})
+                .setThumbnail("https://www.bungie.net/common/destiny2_content/icons/85600cab548e2a5d7c1b9b54e171503f.png")
+                .setTimestamp();
+            outputEmbeds.push(checkpoint);
+        }
+        else if (checkpointActivity.substring(0,4) == "King") {
+            var checkpoint = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle(checkpointEncounter)
+                .setAuthor({name: checkpointActivity})
+                .setDescription(joinCode)
+                .setFooter({text: checkpointFireteamSize})
+                .setThumbnail("https://www.bungie.net/common/destiny2_content/icons/5f093b0468e0fdc1f073e00dbddbe48a.png")
+                .setTimestamp();
+            outputEmbeds.push(checkpoint);
+        }
+        else if (checkpointActivity.substring(0,4) == "Spir") {
+            var checkpoint = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle(checkpointEncounter)
+                .setAuthor({name: checkpointActivity})
+                .setDescription(joinCode)
+                .setFooter({text: checkpointFireteamSize})
+                .setThumbnail("https://www.bungie.net/common/destiny2_content/icons/e3377923c790bbf82e3562bac4402cc2.png")
+                .setTimestamp();
+            outputEmbeds.push(checkpoint);
+        }
+        else {
+            var checkpoint = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle(checkpointEncounter)
+                .setAuthor({name: checkpointActivity})
+                .setDescription(joinCode)
+                .setFooter({text: checkpointFireteamSize})
+                .setTimestamp();
+            outputEmbeds.push(checkpoint);
+        }
+
+        
     }
 
     //Log when checkpoints were grabbed.
