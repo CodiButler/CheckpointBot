@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, messageLink } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { waitForDebugger } = require('inspector');
 const jsdom = require("jsdom");
 require("dotenv").config();
@@ -6,9 +6,11 @@ const express = require ("express");
 const app = express();
 const { getTextNodeContent } = require('jsdom/lib/jsdom/living/domparsing/parse5-adapter-serialization');
 const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
+const { join } = require('path');
 
 
 console.log(">> Starting CheckpointBot 1.0\n");
+
 
 const client = new Client({
     intents: [
@@ -17,11 +19,14 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
     ],
 });
+
+
 client.login(process.env.TOKEN);
 client.on('ready', async () => {
     console.log(">> Successfully started CheckpointBot 1.0\n");
     postCheckpoints();
 });
+
 
 async function postCheckpoints() {
     //Scrape D2Checkpoints.com for HTML
@@ -40,38 +45,15 @@ async function postCheckpoints() {
     var lastMsg = (await channel.messages.fetch({ limit: 1 })).last();
     //If the bot sent the last message, update it. Otherwise, send a new one.
     if (lastMsg != undefined && lastMsg.author.id == client.user.id) {
-        updateCheckpoints(lastMsg, checkpoints) 
+        updateCheckpoints(lastMsg, {embeds: checkpoints}) 
     }
     else {
         console.log("> Sending checkpoint message\n");
-        channel.send(checkpoints);
+        channel.send({embeds: checkpoints});
     }
-
-    function pingURL() {
-         // Getting the URL from the User
-         var settings = {
-            // Defining the request configuration
-            cache: false,
-            dataType: "jsonp",
-            crossDomain: true,
-            url: "https://red-famous-codfish.cyclic.app/",
-            method: "GET",
-            timeout: 5000,
-            headers: {accept: "application/json", "Access-Control-Allow-Origin": "*",},
-
-            // Defines the response to be made
-            // for certain status codes
-            statusCode: {},
-         };
-         // Sends the request and observes the response
-         $.ajax(settings).done(function (response) {
-            console.log(response);
-         })
-         .fail(function (response) {
-            console.log("Error" + response);
-         });
-      }
 }
+
+
 async function getCheckpoints() {
     //Get the raw HTML from the webpage.
     var html = (await (await fetch('https://d2checkpoint.com/')).text());
@@ -84,21 +66,35 @@ async function getCheckpoints() {
     //If there are no cards, there are no checkpoints.
     if (cards.length == 0) { var outputMessage = "> *No checkpoints currently*\n"; console.log(outputMessage.replace(/\n/g, '')); }
     else { console.log("> " + cards.length + " checkpoints currently"); var outputMessage = ""; }
-
-    //Go through each card and grab the checkpoint info and join code then format.
+    var outputEmbeds = [];
+    //Go through each card and grab the checkpoint info and join code then format them into discord embeds.
     for (var x = 0; x < cards.length; x++) {
         var cardBody = cards[x];
-        var checkpointInfo = (cardBody.childNodes[3].textContent.replace(/\n/g, '    ').substring(2)) + "\n";
-        var joinCode = "`/join " + cardBody.childNodes[5].textContent.replace(/\n/g, '') + "`";
-        outputMessage += "> " + checkpointInfo + "> " + joinCode + "\n> \n";
+        var checkpointInfo = cardBody.childNodes[3];
+        var checkpointEncounter = checkpointInfo.childNodes[1].textContent;
+        var checkpointActivity = checkpointInfo.childNodes[3].textContent;
+        var checkpointFireteamSize = checkpointInfo.childNodes[5].textContent;
+        var joinCode = "/join " + cardBody.childNodes[5].textContent.replace(/\n/g, '');
+        var checkpoint = new EmbedBuilder()
+            .setColor(0x0099FF)
+            .setTitle(checkpointEncounter)
+            .setAuthor({name: checkpointActivity})
+            .setDescription(joinCode)
+            .setFooter({text: checkpointFireteamSize})
+            .setTimestamp();
+        outputEmbeds.push(checkpoint);
     }
 
-    //Add a clientside timestamp, format once more, and return string of formatted checkpoints.
+    //Log when checkpoints were grabbed.
     var timestamp = Date.now();
     var now = new Date(timestamp);
     console.log("> Grabbed checkpoints on "+ now.toLocaleString());
-    return (outputMessage + "> *Updated <t:" + (timestamp / 1000).toPrecision(10) + ":F>*");
+
+    //
+    return (outputEmbeds);
 }
+
+
 async function updateCheckpoints(message, updatedMsg) {
     console.log("> Updating checkpoint message\n")
     await message.edit(updatedMsg);
@@ -120,6 +116,8 @@ function getGuildUsingName(server_name) {
     //Return a guild object using its ID.
     return (client.guilds.cache.get(guildID));
 }
+
+
 function getChannelUsingName(guild, channel_name) {
     //Get channels iterator for a given server.
     var channels = guild.channels.cache.entries()
@@ -135,9 +133,12 @@ function getChannelUsingName(guild, channel_name) {
     //Return channel object using its ID.
     return (getChannelUsingID(channelID));
 }
+
+
 function getChannelUsingID(channel_id) {
     return (client.channels.cache.get(channel_id));
 }
+
 
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
   const interaction = req.body;
