@@ -11,7 +11,7 @@ const { join } = require('path');
 
 console.log(">> Starting CheckpointBot 1.0\n");
 
-useEffect(() => {
+function useEffect(() => {
     if(window){
         console.log("BRUH!!!!!!");
     }
