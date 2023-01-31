@@ -49,7 +49,7 @@ async function postCheckpoints() {
     if (channel == undefined) {
         console.log(">> ERR: CHANNEL UNDEFINED");
         console.log(process.env.CHANNEL_ID);
-        console.log(client.channels.cache);
+        console.log(client.channels.cache.keys());
     }
     else {var lastMsg = (await channel.messages.fetch({ limit: 1 })).last();}
 
