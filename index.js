@@ -46,6 +46,7 @@ async function postCheckpoints() {
     //Get channel using the channel's ID
     var channel = client.channels.cache.get(process.env.CHANNEL_ID);
     //Get the last message sent in the given channel
+    if (channel == undefined) {console.log(">> ERR: CHANNEL UNDEFINED");}
     var lastMsg = (await channel.messages.fetch({ limit: 1 })).last();
 
     //If the bot sent the last message, update it. Otherwise, send a new one.
@@ -160,7 +161,6 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
                 data:{
                     content: "Checkpoints should be updated.", 
                 },
-                ephemeral: true,
             });
         }
     }
