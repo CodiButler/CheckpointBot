@@ -79,38 +79,40 @@ async function getCheckpoints() {
             .setTimestamp();
         return noCheckpoints;
     }
-    else { console.log("> " + cards.length + " checkpoints currently"); var outputMessage = ""; }
-    var embedList = [];
+    else { 
+        console.log("> " + cards.length + " checkpoints currently");
+        var embedList = [];
 
-    //Go through each card
-    for (var x = 0; x < cards.length; x++) {
-        //Get the activity, encounter, fireteam size, and join code from each card.
-        var cardBody = cards[x];
-        var checkpointInfo = cardBody.childNodes[3];
-        var checkpointEncounter = checkpointInfo.childNodes[1].textContent;
-        var checkpointActivity = checkpointInfo.childNodes[3].textContent;
-        var checkpointFireteamSize = checkpointInfo.childNodes[5].textContent;
-        var joinCode = "/join " + cardBody.childNodes[5].textContent.replace(/\n/g, '');
+        //Go through each card
+        for (var x = 0; x < cards.length; x++) {
+            //Get the activity, encounter, fireteam size, and join code from each card.
+            var cardBody = cards[x];
+            var checkpointInfo = cardBody.childNodes[3];
+            var checkpointEncounter = checkpointInfo.childNodes[1].textContent;
+            var checkpointActivity = checkpointInfo.childNodes[3].textContent;
+            var checkpointFireteamSize = checkpointInfo.childNodes[5].textContent;
+            var joinCode = "/join " + cardBody.childNodes[5].textContent.replace(/\n/g, '');
 
-        //Build an embed with relevant info
-        var checkpoint = new EmbedBuilder()
-                .setTitle(checkpointEncounter)
-                .setAuthor({name: checkpointActivity})
-                .setDescription(joinCode)
-                .setFooter({text: checkpointFireteamSize})
-                .setTimestamp();
+            //Build an embed with relevant info
+            var checkpoint = new EmbedBuilder()
+                    .setTitle(checkpointEncounter)
+                    .setAuthor({name: checkpointActivity})
+                    .setDescription(joinCode)
+                    .setFooter({text: checkpointFireteamSize})
+                    .setTimestamp();
 
-        //Add a thumbnail and color based on activity location
-        embedList.push(styleEmbed(checkpoint));
+            //Add a thumbnail and color based on activity location
+            embedList.push(styleEmbed(checkpoint));
+        }
+
+        //Log when checkpoints were grabbed.
+        var timestamp = Date.now();
+        var now = new Date(timestamp);
+        console.log("> Grabbed checkpoints on "+ now.toLocaleString());
+
+        //Return list of embeds
+        return (embedList);
     }
-
-    //Log when checkpoints were grabbed.
-    var timestamp = Date.now();
-    var now = new Date(timestamp);
-    console.log("> Grabbed checkpoints on "+ now.toLocaleString());
-
-    //Return list of embeds
-    return (embedList);
 }
 
 
