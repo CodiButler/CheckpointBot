@@ -72,12 +72,12 @@ async function getCheckpoints() {
 
     //If there are no cards, there are no checkpoints.
     if (cards.length == 0) { 
-        console.log("No checkpoints currently");
+        console.log("> No checkpoints currently");
         var noCheckpoints = new EmbedBuilder()
             .setTitle("No checkpoints currently")
             .setColor('Blue')
             .setTimestamp();
-        return noCheckpoints;
+        return [noCheckpoints];
     }
     else { 
         console.log("> " + cards.length + " checkpoints currently");
