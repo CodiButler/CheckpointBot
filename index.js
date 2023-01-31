@@ -45,6 +45,7 @@ async function postCheckpoints() {
     var checkpoints = await getCheckpoints();
     //Get channel using the channel's ID
     var channel = client.channels.cache.get(process.env.CHANNEL_ID);
+    console.log(channel);
     //Get the last message sent in the given channel
     var lastMsg = (await channel.messages.fetch({ limit: 1 })).last();
 
