@@ -7,6 +7,17 @@ const app = express();
 const { getTextNodeContent } = require('jsdom/lib/jsdom/living/domparsing/parse5-adapter-serialization');
 const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
 const { join } = require('path');
+const axios = require('axios')
+const discord_api = axios.create({
+    baseURL: 'https://discord.com/api/',
+    timeout: 3000,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+      "Access-Control-Allow-Headers": "Authorization",
+      "Authorization": `Bot ${TOKEN}`
+    }
+  });
 
 
 console.log(">> Starting CheckpointBot 1.0\n");
@@ -200,4 +211,8 @@ app.get('/register_commands', async (req,res) =>{
   
   app.get('/', async (req,res) =>{
     return res.send('Follow documentation ')
+  })
+
+  app.listen(8999, () => {
+
   })
