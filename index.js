@@ -32,10 +32,12 @@ const client = new Client({
 });
 
 
+var ready=false;
 client.login(process.env.TOKEN);
 client.on('ready', async () => {
     console.log(">> Successfully started CheckpointBot 1.0\n");
     postCheckpoints();
+    ready = true;
 });
 
 
@@ -152,7 +154,7 @@ function styleEmbed(embed) {
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
     const interaction = req.body;
 
-    if (interaction.type === InteractionType.APPLICATION_COMMAND) {
+    if (interaction.type === InteractionType.APPLICATION_COMMAND && ready) {
         console.log("> Received "+interaction.data.name+" command");
         if(interaction.data.name == 'update'){
             await postCheckpoints();
