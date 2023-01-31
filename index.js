@@ -11,11 +11,6 @@ const { join } = require('path');
 
 console.log(">> Starting CheckpointBot 1.0\n");
 
-window.addEventListener('load', function() {
-    if (window) {
-      console.log(window.location);
-    }
-  });
 
 const client = new Client({
     intents: [
