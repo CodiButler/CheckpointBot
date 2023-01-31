@@ -156,7 +156,6 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
       if(interaction.data.name == 'update'){
         console.log("> Received update command");
         postCheckpoints();
-        console.log(interaction);
         res.send({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             content: "Checkpoints should be updated." ,
