@@ -157,7 +157,7 @@ function styleEmbed(embed) {
 //Block for defining user commands
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
     const interaction = req.body;
-
+    await client.ready;
     if (interaction.type === InteractionType.APPLICATION_COMMAND) {
         console.log("> Received "+interaction.data.name+" command");
         if(interaction.data.name == 'update') {
