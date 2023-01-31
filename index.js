@@ -20,7 +20,7 @@ const discord_api = axios.create({
   });
 
 
-console.log(">> Starting CheckpointBot 1.0\n");
+console.log(">> Starting CheckpointBot 2.0\n");
 
 
 const client = new Client({
@@ -32,12 +32,10 @@ const client = new Client({
 });
 
 
-var ready=false;
 client.login(process.env.TOKEN);
 client.on('ready', async () => {
-    console.log(">> Successfully started CheckpointBot 1.0\n");
+    console.log(">> CheckpointBot 2.0 is ready!\n");
     postCheckpoints();
-    ready = true;
 });
 
 
@@ -157,11 +155,11 @@ function styleEmbed(embed) {
 //Block for defining user commands
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
     const interaction = req.body;
-    await client.ready;
+    await client.login(process.env.TOKEN);
     if (interaction.type === InteractionType.APPLICATION_COMMAND) {
         console.log("> Received "+interaction.data.name+" command");
         if(interaction.data.name == 'update') {
-            if (ready) {await postCheckpoints();}
+            await postCheckpoints();
             res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data:{
