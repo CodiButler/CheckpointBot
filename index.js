@@ -115,7 +115,7 @@ async function getCheckpoints() {
     }
 }
 
-
+//Styles embeds based on their activity
 function styleEmbed(embed) {
     var shortAct = embed.data.author.name.substring(0,4);
 
@@ -147,7 +147,7 @@ function styleEmbed(embed) {
 }
 
 
-//Unused block for user commands
+//Block for defining user commands
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
     const interaction = req.body;
 
@@ -156,12 +156,13 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
       if(interaction.data.name == 'update'){
         console.log("> Received update command");
         postCheckpoints();
-        await res.reply({content: "Checkpoints should be updated.", ephemeral: true});
+        await req.reply({content: "Checkpoints should be updated.", ephemeral: true});
       }
   
     }
 });
 
+//Block to register commands with Discord
 app.get('/register_commands', async (req,res) =>{
     let slash_commands = [
       {
@@ -181,7 +182,4 @@ app.get('/register_commands', async (req,res) =>{
       return res.send(`${e.code} error from discord`)
     }
   })
-
-  app.listen(8999, () => {
-
-  })
+  app.listen(8999, () => {})
