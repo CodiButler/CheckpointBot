@@ -45,7 +45,6 @@ async function postCheckpoints() {
     var checkpoints = await getCheckpoints();
     //Get channel using the channel's ID
     var channel = client.channels.cache.get(process.env.CHANNEL_ID);
-    console.log(channel);
     //Get the last message sent in the given channel
     var lastMsg = (await channel.messages.fetch({ limit: 1 })).last();
 
@@ -158,8 +157,10 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
             await postCheckpoints();
             res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-                data:{content: "Checkpoints should be updated."},
-                ephemeral: true
+                data:{
+                    content: "Checkpoints should be updated.", 
+                    ephemeral: true
+                }
             });
         }
     }
