@@ -132,7 +132,7 @@ function styleEmbed(embed) {
     }
     else if (shortAct == "Deep") { //Deep Stone Crypt
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/85600cab548e2a5d7c1b9b54e171503f.png")
-        .setColor('#D1484E');
+        .setColor('#DFDDDD');
     }
     else if (shortAct == "King") { //King's Fall
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/5f093b0468e0fdc1f073e00dbddbe48a.png")
@@ -140,7 +140,11 @@ function styleEmbed(embed) {
     }
     else if (shortAct == "Spir") { //Spire of the Watcher
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/e3377923c790bbf82e3562bac4402cc2.png")
-        .setColor('#ED4F44');
+        .setColor('#EE4C3F');
+    }
+    else if (shortAct == "Gras") { //Grasp of Avarice
+        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/4b5030a6799f4a5070571a6d6c2a9cbf.png")
+        .setColor('#CEAE33');
     }
     else { //Unknown Encounter
         embed.setColor('Blue');
@@ -161,7 +165,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
             res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data:{
-                    content: "Checkpoints should be updated.", 
+                    content: "Checkpoints updated.", 
                 },
             });
         }
