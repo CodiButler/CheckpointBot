@@ -38,7 +38,7 @@ client.on('ready', async () => {
     postCheckpoints();
 });
 
-
+//Sends or updates a checkpoint list
 async function postCheckpoints() {
     console.log("> Posting Checkpoints");
     //Scrape D2Checkpoints.com for HTML
@@ -60,12 +60,12 @@ async function postCheckpoints() {
     }
 }
 
-
+//Grabs the checkpoints from https://d2checkpoint.com/ and turns them into discord embeds
 async function getCheckpoints() {
 
     //Get the raw HTML from the webpage.
     var html = (await (await fetch('https://d2checkpoint.com/')).text());
-    console.log("> Grabbing current checkpoints from https://d2checkpoint.com/");
+    console.log("> Grabbing current checkpoints");
     //Parse the HTML into a DOM.
     var dom = new jsdom.JSDOM(html);
     //Get all 'card' objects from the DOM.
@@ -124,6 +124,14 @@ function styleEmbed(embed) {
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/cfe45e188245bb89a08efa3f481024da.png")
         .setColor('#745B70');
     }
+    else if (shortAct == "Vaul") { //Vault of Glass
+        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/746978970e0d864e0738c8823b430267.png")
+        .setColor('#FFFFFF');
+    }
+    else if (shortAct == "Gras") { //Grasp of Avarice
+        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/4b5030a6799f4a5070571a6d6c2a9cbf.png")
+        .setColor('#CEAE33');
+    }
     else if (shortAct == "Prop") { //Prophecy
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/d2e23b3db794a8226fa417856b5f7f60.png")
         .setColor('#FFFFFF');
@@ -140,10 +148,6 @@ function styleEmbed(embed) {
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/e3377923c790bbf82e3562bac4402cc2.png")
         .setColor('#EE4C3F');
     }
-    else if (shortAct == "Gras") { //Grasp of Avarice
-        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/4b5030a6799f4a5070571a6d6c2a9cbf.png")
-        .setColor('#CEAE33');
-    }
     else { //Unknown Encounter
         embed.setColor('Blue');
     }
@@ -151,13 +155,12 @@ function styleEmbed(embed) {
     return(embed);
 }
 
-
 //Block for defining user commands
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
     const interaction = req.body;
     await client.login(process.env.TOKEN);
     if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-        console.log("> Received "+interaction.data.name+" command");
+        console.log("> Received "+interaction.data.name+" command from "+interaction.member.user.username);
         if(interaction.data.name == 'update') {
             await postCheckpoints();
             res.send({
