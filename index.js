@@ -154,10 +154,10 @@ function styleEmbed(embed) {
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (req, res) => {
     const interaction = req.body;
 
-    if (interaction.type === InteractionType.APPLICATION_COMMAND && ready) {
+    if (interaction.type === InteractionType.APPLICATION_COMMAND) {
         console.log("> Received "+interaction.data.name+" command");
-        if(interaction.data.name == 'update'){
-            await postCheckpoints();
+        if(interaction.data.name == 'update') {
+            if (ready) {await postCheckpoints();}
             res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data:{
