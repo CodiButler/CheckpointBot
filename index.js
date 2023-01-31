@@ -46,11 +46,7 @@ async function postCheckpoints() {
     //Get channel using the channel's ID
     var channel = client.channels.cache.get(process.env.CHANNEL_ID);
     //Get the last message sent in the given channel
-    if (channel == undefined) {
-        console.log(">> ERR: CHANNEL UNDEFINED");
-        console.log(process.env.CHANNEL_ID);
-        console.log(client.channels.cache.keys().next());
-    }
+    if (channel == undefined) {console.log(">> ERR: CHANNEL UNDEFINED");}
     else {var lastMsg = (await channel.messages.fetch({ limit: 1 })).last();}
 
     //If the bot sent the last message, update it. Otherwise, send a new one.
