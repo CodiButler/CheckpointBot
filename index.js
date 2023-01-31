@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder, SlashCommandBuilder, InteractionResponse } = require('discord.js');
 const { waitForDebugger } = require('inspector');
 const jsdom = require("jsdom");
 require("dotenv").config();
@@ -159,8 +159,8 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data:{
                     content: "Checkpoints should be updated.", 
-                    ephemeral: true
-                }
+                },
+                ephemeral: true,
             });
         }
     }
