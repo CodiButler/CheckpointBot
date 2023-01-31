@@ -145,15 +145,8 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
     if (interaction.type === InteractionType.APPLICATION_COMMAND) {
 
       if(interaction.data.name == 'update'){
+        console.log("> Received update command");
         postCheckpoints();
-        /*
-        return res.send({
-          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: {
-            content: `Yo ${interaction.member.user.username}!`,
-          },
-        });
-        */
       }
   
     }
