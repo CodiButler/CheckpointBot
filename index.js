@@ -156,6 +156,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
       if(interaction.data.name == 'update'){
         console.log("> Received update command");
         postCheckpoints();
+        await interaction.reply({content: "Checkpoints should be updated.", ephemeral: true});
       }
   
     }
