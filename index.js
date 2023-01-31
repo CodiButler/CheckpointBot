@@ -71,7 +71,14 @@ async function getCheckpoints() {
     var cards = dom.window.document.getElementsByClassName("card");
 
     //If there are no cards, there are no checkpoints.
-    if (cards.length == 0) { var outputMessage = "> *No checkpoints currently*\n"; console.log(outputMessage.replace(/\n/g, '')); }
+    if (cards.length == 0) { 
+        console.log("No checkpoints currently");
+        var noCheckpoints = new EmbedBuilder()
+            .setTitle("No checkpoints currently")
+            .setColor('Blue')
+            .setTimestamp();
+        return noCheckpoints;
+    }
     else { console.log("> " + cards.length + " checkpoints currently"); var outputMessage = ""; }
     var embedList = [];
 
