@@ -152,17 +152,15 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async (re
     const interaction = req.body;
 
     if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-
-      if(interaction.data.name == 'update'){
-        console.log("> Received update command");
-        await postCheckpoints();
-        res.send({
-            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            content: "Checkpoints should be updated." ,
-            ephemeral: true
-        });
-      }
-  
+        console.log("> Received "+interaction.data.name+" command");
+        if(interaction.data.name == 'update'){
+            await postCheckpoints();
+            res.send({
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data:{content: "Checkpoints should be updated."},
+                ephemeral: true
+            });
+        }
     }
 });
 
