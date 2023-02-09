@@ -148,6 +148,14 @@ function styleEmbed(embed) {
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/e3377923c790bbf82e3562bac4402cc2.png")
         .setColor('#EE4C3F');
     }
+    else if (shortAct == "Vow ") { //Vow of the Disciple
+        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/ed4eb907ad758ec164516a07fb4f6241.png")
+        .setColor('#666767');
+    }
+    else if (shortAct == "Dual") { //Duality
+        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/dc4eed95d63fdaf81c87223a56bb67c2.png")
+        .setColor('#2B564F');
+    }
     else { //Unknown Encounter
         embed.setColor('Blue');
     }
