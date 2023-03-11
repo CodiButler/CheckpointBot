@@ -118,43 +118,47 @@ async function getCheckpoints() {
 
 //Styles embeds based on their activity
 function styleEmbed(embed) {
-    var shortAct = embed.data.author.name.substring(0,4);
+    var shortName = embed.data.author.name.substring(0,4);
 
-    if (shortAct == "Last") { //Last Wish
+    if (shortName == "Last") { //Last Wish
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/cfe45e188245bb89a08efa3f481024da.png")
         .setColor('#745B70');
     }
-    else if (shortAct == "Vaul") { //Vault of Glass
+    else if (shortName == "Vaul") { //Vault of Glass
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/746978970e0d864e0738c8823b430267.png")
         .setColor('#FFFFFF');
     }
-    else if (shortAct == "Gras") { //Grasp of Avarice
+    else if (shortName == "Gras") { //Grasp of Avarice
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/4b5030a6799f4a5070571a6d6c2a9cbf.png")
         .setColor('#CEAE33');
     }
-    else if (shortAct == "Prop") { //Prophecy
+    else if (shortName == "Prop") { //Prophecy
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/d2e23b3db794a8226fa417856b5f7f60.png")
         .setColor('#FFFFFF');
     }
-    else if (shortAct == "Deep") { //Deep Stone Crypt
+    else if (shortName == "Deep") { //Deep Stone Crypt
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/85600cab548e2a5d7c1b9b54e171503f.png")
         .setColor('#DFDDDD');
     }
-    else if (shortAct == "King") { //King's Fall
+    else if (shortName == "King") { //King's Fall
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/5f093b0468e0fdc1f073e00dbddbe48a.png")
         .setColor('#CE5045');
     }
-    else if (shortAct == "Spir") { //Spire of the Watcher
+    else if (shortName == "Spir") { //Spire of the Watcher
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/e3377923c790bbf82e3562bac4402cc2.png")
         .setColor('#EE4C3F');
     }
-    else if (shortAct == "Vow ") { //Vow of the Disciple
+    else if (shortName == "Vow ") { //Vow of the Disciple
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/ed4eb907ad758ec164516a07fb4f6241.png")
         .setColor('#666767');
     }
-    else if (shortAct == "Dual") { //Duality
+    else if (shortName == "Dual") { //Duality
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/dc4eed95d63fdaf81c87223a56bb67c2.png")
         .setColor('#2B564F');
+    }
+    else if (shortName == "Gard") { //Garden of Salvation
+        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/05cb3235ebae6d3f09e196c0e97ae4ea.png")
+        .setColor('#9CDBEF');
     }
     else { //Unknown Encounter
         embed.setColor('Blue');
