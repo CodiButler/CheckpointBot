@@ -160,6 +160,10 @@ function styleEmbed(embed) {
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/05cb3235ebae6d3f09e196c0e97ae4ea.png")
         .setColor('#9CDBEF');
     }
+    else if(shortName == "Root") {
+        embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/d6cec18c20fa432d23189aecf9a0fcc2.png")
+        .setColor('White');
+    }
     else { //Unknown Encounter
         embed.setColor('Blue');
     }
