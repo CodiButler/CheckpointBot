@@ -124,6 +124,10 @@ function styleEmbed(embed) {
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/cfe45e188245bb89a08efa3f481024da.png")
         .setColor('#745B70');
     }
+    else if (shortName == "Shat") { //Shattered Throne
+        embed.setThumbnail("https://cdn.discordapp.com/emojis/1087166646050885712.webp?size=44&quality=lossless")
+        .setColor('#777A79');
+    }
     else if (shortName == "Vaul") { //Vault of Glass
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/746978970e0d864e0738c8823b430267.png")
         .setColor('#FFFFFF');
