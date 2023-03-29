@@ -128,6 +128,10 @@ function styleEmbed(embed) {
         embed.setThumbnail("https://cdn.discordapp.com/emojis/1087166646050885712.webp?size=44&quality=lossless")
         .setColor('#777A79');
     }
+    else if (shortName == "Pit ") { //Pit of Heresy
+        embed.setThumbnail("https://cdn.discordapp.com/emojis/1087166645115564212.webp?size=44&quality=lossless")
+        .setColor('#A71A31');
+    }
     else if (shortName == "Vaul") { //Vault of Glass
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/746978970e0d864e0738c8823b430267.png")
         .setColor('#FFFFFF');
@@ -164,7 +168,7 @@ function styleEmbed(embed) {
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/05cb3235ebae6d3f09e196c0e97ae4ea.png")
         .setColor('#9CDBEF');
     }
-    else if(shortName == "Root") {
+    else if(shortName == "Root") { //Root of Nightmares
         embed.setThumbnail("https://www.bungie.net/common/destiny2_content/icons/d6cec18c20fa432d23189aecf9a0fcc2.png")
         .setColor('White');
     }
